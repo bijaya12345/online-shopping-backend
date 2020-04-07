@@ -16,6 +16,7 @@ import com.uwm.onlineshopping.dto.CustomerDto;
 import com.uwm.onlineshopping.service.CustomerService;
 import com.uwm.onlineshopping.util.ServiceResponse;
 
+//for rest API
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
