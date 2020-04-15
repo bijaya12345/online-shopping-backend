@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.uwm.onlineshopping.dto.CartDto;
 
+// interface class 
 public interface CartService {
+
+      // list of abstract methods 
+         
 	void saveCart(CartDto cartDto);
 
 	void updateCart(CartDto cartDto);
