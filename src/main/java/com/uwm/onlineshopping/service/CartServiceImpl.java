@@ -11,8 +11,11 @@ import com.uwm.onlineshopping.dto.CartDto;
 import com.uwm.onlineshopping.model.CartEntity;
 import com.uwm.onlineshopping.repository.CartRepository;
 
-@Service
+@Service 
+// implement of interface class 
 public class CartServiceImpl implements CartService {
+
+// implementing bastract methods ( crude functions) 
 
 	private final CartRepository cartRepository;
 
