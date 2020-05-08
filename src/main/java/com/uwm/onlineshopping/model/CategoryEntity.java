@@ -17,6 +17,7 @@ public class CategoryEntity extends BaseEntity {
 	private String categoryName;
 	@Column(name = "category_description")
 	private String categoryDescription;
+	
 	@OneToMany
 	private List<ProductEntity> products = new ArrayList<>();
 
