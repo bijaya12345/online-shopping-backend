@@ -1,11 +1,14 @@
 package com.uwm.onlineshopping.dto;
 
+import java.math.BigDecimal;
+
 public class ProductDto extends BaseDto {
 
 	private String title;
-	private double price;
+	private BigDecimal price;
 	private String description;
 	private String image;
+	private byte[] img;
 
 	public String getTitle() {
 		return title;
@@ -15,11 +18,11 @@ public class ProductDto extends BaseDto {
 		this.title = title;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -37,6 +40,14 @@ public class ProductDto extends BaseDto {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.uwm.onlineshopping.service;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.uwm.onlineshopping.dto.ProductDto;
 import com.uwm.onlineshopping.model.ProductEntity;
@@ -15,16 +18,24 @@ import com.uwm.onlineshopping.repository.ProductRepository;
 public class ProductServiceImpl implements ProductSercice {
 
 	private final ProductRepository productRepository;
+	private final FileService fileService;
 
 	@Autowired
-	public ProductServiceImpl(ProductRepository productRepository) {
+	public ProductServiceImpl(ProductRepository productRepository, FileService fileService) {
 		this.productRepository = productRepository;
+		this.fileService = fileService;
 	}
 
 	@Override
-	public void saveProduct(ProductDto productDto) {
+	public void saveProduct(MultipartFile file, String title, String price, String description) throws IOException {
+
+//		FileMetaData fileMetaData = fileService.storeData(file, description, description);
 		ProductEntity productEntity = new ProductEntity();
-		BeanUtils.copyProperties(productDto, productEntity);
+		productEntity.setPrice(new BigDecimal(price));
+//		productEntity.setImage(fileMetaData.getLocation());
+		productEntity.setTitle(title);
+		productEntity.setDescription(description);
+		productEntity.setImg(file.getBytes());
 		productRepository.save(productEntity);
 	}
 
@@ -44,7 +55,8 @@ public class ProductServiceImpl implements ProductSercice {
 	@Override
 	public ProductDto getProductById(Long id) {
 		ProductDto productDto = new ProductDto();
-		BeanUtils.copyProperties(productRepository.findById(id), productDto);
+		ProductEntity productEntity = productRepository.findById(id).get();
+		BeanUtils.copyProperties(productEntity, productDto);
 		return productDto;
 	}
 

@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uwm.onlineshopping.dto.CartDto;
-import com.uwm.onlineshopping.dto.ProductDto;
 import com.uwm.onlineshopping.service.CartService;
 import com.uwm.onlineshopping.util.ServiceResponse;
 
 @RestController
-@RequestMapping("carts")
+@RequestMapping("/api/v1/carts")
 public class CartController {
 
 	private final CartService cartSercice;

@@ -17,7 +17,7 @@ import com.uwm.onlineshopping.service.RoleService;
 import com.uwm.onlineshopping.util.ServiceResponse;
 
 @RestController
-@RequestMapping("roles")
+@RequestMapping("/api/v1/roles")
 public class RoleController {
 
 	private final RoleService roleService;

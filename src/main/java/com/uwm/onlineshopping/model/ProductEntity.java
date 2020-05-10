@@ -1,6 +1,10 @@
 package com.uwm.onlineshopping.model;
 
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -10,9 +14,11 @@ public class ProductEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String title;
-	private double price;
+	private BigDecimal price;
 	private String description;
-	private String image;
+	@Lob
+	@Column(name = "IMG")
+	private byte[] img;
 
 	public String getTitle() {
 		return title;
@@ -22,11 +28,11 @@ public class ProductEntity extends BaseEntity {
 		this.title = title;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -38,12 +44,12 @@ public class ProductEntity extends BaseEntity {
 		this.description = description;
 	}
 
-	public String getImage() {
-		return image;
+	public byte[] getImg() {
+		return img;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImg(byte[] img) {
+		this.img = img;
 	}
 
 }

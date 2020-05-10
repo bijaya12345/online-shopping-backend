@@ -1,14 +1,12 @@
 package com.uwm.onlineshopping.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,20 +14,20 @@ import javax.persistence.Table;
 public class CartEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	@OneToMany
-	private List<ProductEntity> products = new ArrayList<>();
+	@Column(name = "product_order_ids")
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ProductOrderEntity> productOrderIds;
 	@Column(name = "total_price")
 	private BigDecimal totalPrice;
-	@JoinColumn(name = "customer_id")
-	@OneToOne
-	private CustomerEntity customerId;
+	@Column(name = "customer_id")
+	private int customerId;
 
-	public List<ProductEntity> getProducts() {
-		return products;
+	public List<ProductOrderEntity> getProductOrderIds() {
+		return productOrderIds;
 	}
 
-	public void setProducts(List<ProductEntity> products) {
-		this.products = products;
+	public void setProductOrderIds(List<ProductOrderEntity> productOrderIds) {
+		this.productOrderIds = productOrderIds;
 	}
 
 	public BigDecimal getTotalPrice() {
@@ -40,11 +38,11 @@ public class CartEntity extends BaseEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public CustomerEntity getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(CustomerEntity customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 

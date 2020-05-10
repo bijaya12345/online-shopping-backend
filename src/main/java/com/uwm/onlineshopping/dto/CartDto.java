@@ -1,44 +1,35 @@
 package com.uwm.onlineshopping.dto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+public class CartDto extends BaseDto {
 
-import com.uwm.onlineshopping.model.CustomerEntity;
-import com.uwm.onlineshopping.model.ProductEntity;
+	private List<CheckoutDto> products;
+	private BigDecimal total;
+	private UserDto customerId;
 
-public class CartDto {
-
-	@OneToMany
-	private List<ProductEntity> products = new ArrayList<>();
-	private BigDecimal totalPrice;
-	@OneToOne
-	private CustomerEntity customerId;
-
-	public List<ProductEntity> getProducts() {
+	public List<CheckoutDto> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<ProductEntity> products) {
+	public void setProducts(List<CheckoutDto> products) {
 		this.products = products;
 	}
 
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
+	public BigDecimal getTotal() {
+		return total;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
-	public CustomerEntity getCustomerId() {
+	public UserDto getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(CustomerEntity customerId) {
+	public void setCustomerId(UserDto customerId) {
 		this.customerId = customerId;
 	}
 

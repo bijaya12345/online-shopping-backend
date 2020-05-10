@@ -3,14 +3,18 @@ package com.uwm.onlineshopping.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uwm.onlineshopping.dto.RoleDto;
 import com.uwm.onlineshopping.dto.UserDto;
+import com.uwm.onlineshopping.model.RoleEntity;
 import com.uwm.onlineshopping.model.UserEntity;
 import com.uwm.onlineshopping.repository.UserRepository;
+import com.uwm.onlineshopping.util.ShoppingCartUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,9 +27,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void saveUser(UserDto userDto) {
 		UserEntity userEntity = new UserEntity();
-		BeanUtils.copyProperties(userDto, userEntity);
+		userEntity.setFullName(userDto.getFullName());
+		userEntity.setEmail(userDto.getEmail());
+		userEntity.setUserName(userDto.getUserName());
+		userEntity.setDob(userDto.getDob());
+		userEntity.setPassword(ShoppingCartUtil.encodePassword(userDto.getPassword()));
+
+		RoleEntity role = new RoleEntity();
+		role.setId(2L);
+		role.setRoleName("ROLE_CUSTOMER");
+		userEntity.setRole(role);
+
 		userRepository.save(userEntity);
 
 	}

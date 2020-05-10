@@ -1,5 +1,6 @@
 package com.uwm.onlineshopping.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,13 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.uwm.onlineshopping.dto.CartDto;
 import com.uwm.onlineshopping.model.CartEntity;
+import com.uwm.onlineshopping.model.ProductOrderEntity;
 import com.uwm.onlineshopping.repository.CartRepository;
 
-@Service 
-// implement of interface class 
+@Service
 public class CartServiceImpl implements CartService {
-
-// implementing bastract methods ( crude functions) 
 
 	private final CartRepository cartRepository;
 
@@ -27,7 +26,20 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void saveCart(CartDto cartDto) {
 		CartEntity cartEntity = new CartEntity();
-		BeanUtils.copyProperties(cartDto, cartEntity);
+		List<ProductOrderEntity> pList = new ArrayList<>();
+		cartDto.getProducts().forEach(p -> {
+			ProductOrderEntity po = new ProductOrderEntity();
+			po.setProductId(p.getProduct().getId());
+			po.setProductName(p.getProduct().getTitle());
+			po.setPrice(p.getProduct().getPrice());
+			po.setQuantity(p.getQuantity());
+			po.setPrice(p.getProduct().getPrice());
+			po.setCustomerId(2);
+			pList.add(po);
+		});
+		cartEntity.setProductOrderIds(pList);
+		cartEntity.setTotalPrice(cartDto.getTotal());
+		cartEntity.setCustomerId(2);
 		cartRepository.save(cartEntity);
 	}
 
